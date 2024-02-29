@@ -1,0 +1,58 @@
+START THE PHASE
+
+intalling.... my sql on my local machine
+get done with all my necessary requirements
+
+for creating database CREATE DATABASE myDB; myDB is my database name
+for deleting db DROP DATABASE myDB;
+for changing my db as read only mode: ALTER DATABASE READ ONLY = 1;
+vice versa for read only mode: ALTER DATABASE READ ONLY = 0;
+for using db as the system schema: USE myDb;
+
+to create a new table :create table employees(    in this line we should name the table
+                       emp_id int,                in the we should note the column name aswell as column datatype 
+                       f_name varchar(50),
+                       l_name varchar(50),
+                       pay_scale decimal(5,3),
+                       h_date date
+                       );                          close;
+
+rename the column name:alter table employees      in this we should use the alter keyword
+                        rename column f_name to first_name;  rename keyword
+
+adding another extra column the table : alter table employees
+                                        add column address varchar(50);  add keyword
+
+modyfying the length of the column:alter table employees
+                                  modify column first_name varchar(100); at first it is in 50 value we had changed this to 100
+
+deleting the column:alter table employees
+                    drop column h_date;  we just delete the H_date column in the employee table
+
+changing the position of the column:alter table employees
+                                    modify address varchar(50) to change the position the specific column we should call the the column
+                                    after l_name; we should note the position that after the which column (after  query is must)
+postioning in the first column:alter table employees
+                                modify address varchar(50)
+                                first; postioning first by using first keyword
+adding values to the rows : 
+                            insert into employees
+                            values 		(1,"Santhosh","Kumar",50.90), comma implies the next values 
+                            			(2,"Kumar","kokki",90.80);        we sholud type the date by datatype order
+                            select * from employees;
+
+adding specific values to rows:insert into employees(emp_id,first_name,l_name) we should implies the datatype at first
+                                values 		
+                                			(3,"Kumara","vel");
+                                select * from employees;
+
+selecting specific column values: select first_name,l_name    implies  the specific column name
+                                   from employees;
+
+selecting the row by specific column value: select *        * means all
+                                            from employees   from the table employees
+                                           where emp_id =1;  by putting specific column value
+
+using math fuction greater than equals to:select *
+                                          from employees
+                                         where pay_scale >=50;
