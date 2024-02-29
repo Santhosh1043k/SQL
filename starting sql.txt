@@ -56,3 +56,7 @@ selecting the row by specific column value: select *        * means all
 using math fuction greater than equals to:select *
                                           from employees
                                          where pay_scale >=50;
+
+
+
+
