@@ -1,0 +1,134 @@
+
+to update the null values:UPDATE employees      firstly use the update query
+                         SET pay_scale = 60.900 and set the values to the specific pllace
+                         WHERE emp_id=4;        and note the null value row by their column value
+
+to delete the row : delete from employees use delete query
+                     where emp_id=4;      specify the row 
+                     select * from employees;
+
+to delete all rows: delete from employees
+
+incase of any unconcious error acquired means we probably use commit,autocommit and rollback queries:
+                            set autocommit = off; at we should off the autocommit
+                            commit;               and then commit the recent database manually
+                      in that case any deletion acquired means we will simply rollback the table by:
+                              rollback; this used to undo our database in terms of deletion
+
+to get the current date and time:
+                                create table test(
+                                My_time time,
+                                My_date date,              creating a new table
+                                My_dateandtime datetime
+                                );
+                               insert into test
+                                values(current_time(),current_date(),now());      inserting the values by current date and time using the prebuilded queries
+
+adding unique constraints to the specific coloumn: create table product(
+                                                    p_id int,
+                                                    p_name varchar(25) unique, while creating the table we could add unique constraint
+                                                    p_price decimal(3,2)
+                                                    );
+
+                                                    alter table product
+                                                    add constraint              after creating the table we able to alter by add unique constraint to specific                                                          unique(p_name);             column
+                                                    
+adding not null constraint to the table:   create table product(
+                                            p_id int,
+                                            p_name varchar(25)               while creating the table
+                                            p_price decimal(3,2) not null
+                                            );
+
+                                            alter table product
+                                            modify p_price decimal(4,2) not null; after creating the table                                                         
+
+limiting the values by using the check constraint :create table employee(
+                                                   emp_id int,
+                                                   f_name varchar(50),
+                                                   l_name varchar(50),
+                                                   pay_scale decimal(5,3),
+                                                   h_date date
+                                                   constraint ch_pay check(pay_scale >=5.00)         while craeting the table
+                                                   );
+
+                                                   alter table employee
+                                                   add constraint ch_pay check(pay_scale<=10.00)      after creating the table
+
+                                                   alter table employee
+                                                   drop check ch_pay;  deleting the check by giving the specific name
+
+set default value to the specific value:  create table products(
+                                          p_id int,
+                                          p_name varchar(25),
+                                          p_price decimal(3,2) default 0 (while creating the table set the default value as 0)
+                                          );
+
+                                            alter table products
+                                            alter p_price set default 0; (after creating the table)
+
+setting the primary key - cannot be null,unique -create table transaction(
+                                                 transaction_id int primary key, while creating the taable 
+                                                 amount int
+                                                 );
+                                                 alter table transaction
+                                                 add constraint primary key(transaction_id); after creating the table
+
+adding auto increment constraint to the row : create table transaction(
+                                             transaction_id int primary key auto_increment,  while creating the table
+                                             amount decimal(4,2)
+                                             );
+
+                                            alter table transaction
+                                            auto_increment=1000; aftre creating the table and it also starts from 1000
+
+adding foriegn key to the constraint:create table transactions(
+                                     tran_id int primary key auto_increment,
+                                     amount decimal(5,2),
+                                     customer_id int,
+                                     foreign key(customer_id) references customers(customer_id) while creating the table 
+                                     );
+
+                                      alter table transactions
+                                       drop foreign key transaction_ibfk_1; to delete the foreign key
+                                       
+                                       alter table transactions
+                                       add constraint fk_cus_id    after creating the table by rename the foriegn key
+                                       foreign key(customer_id) references customers(customer_id);
+
+                                      foreign key is the like a primary key in one table that can be found in the different table
+                                        using foriegn we establish a link between two tables
+
+adding joins - inner joins  for thi salso we are implementing the foreign key
+                                      select * from transactions
+                                      inner join customers
+                                      on transactions.customer_id=customers.customer_id; it merge the transaction table and customer taable by the common foreign key customer_id and it also explicits the null value on both sides
+
+left join:select * from transactions
+            left join customers                 it only displays the left table inhere the left table is transaction table respectively and also with null values
+            on transactions.customer_id=customers.customer_id;
+
+righr join:select * from transactions
+            right join customers                 it only displays the right table inhere the right table is customer table respectively and also with null values
+            on transactions.customer_id=customers.customer_id;
+
+                  join is used to combine two or more rows with relative columns
+
+some fuction:select count(amount) as count  in this line im just count the no. of transaction acquired 
+              from transactions;
+max-maximum ,min,avg,concat- to join the two colomns
+
+
+logical operators:   and -   select * from employees
+                        where pay_scale > 60 and job="cp"; it wants tto satisfy the two conditions
+                      or-select * from employees
+                        where job="sd" or job="cp"; it either satisfies one conditions
+                      not-select * from employees
+                            where not job="sd"; it omits the mentiioned value
+                      and not-select * from employees
+                              where not job="sd" and not job="cp"; it omits the two conditions
+                      between and -select * from employees
+                                  where pay_scale between 80 and 90 ; it prints bt the range
+
+                        in-
+                            select * from employees
+                            where job in ("sd","cp");  to find the specific by using in operator
