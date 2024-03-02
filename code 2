@@ -1,0 +1,98 @@
+wildcard methods :select * from employees
+                  where job like "s%";  this will prints the all jobs that starts from letter "S"
+
+                   select * from employees
+                   where l_name like "%r"; this will prints all last name that ends with letter "L"
+
+                   select * from employees
+                   where job like "__"; this will prints all jobs that has only two letters because we only entered the job as 2 letter word that why put that 2 dashes
+
+                    select * from employees
+                    where job like "_p";  this will print all jobs that job has the letter p in the word for this we must know the exact count of the word
+
+order by methods: select * from employees
+                   order by pay_scale asc; this will print all pay_scale by ascending order
+
+                  select * from employees
+                  order by pay_scale desc; this will print all pay_scale by descending order
+
+limit clause : to limit the records for printing
+                     select * from employees
+                     limit 1;  it wil print only print the 1st row
+
+                     select * from employees
+                     limit 1,1; it will print the second row only because we entered 1,1 means 1+1
+
+                       select * from employees
+                       limit 2;  it will print the two rows
+                    
+union - it combies the two or more statements from selecting combination of two tables one by one (to combine we need same amount columns the two tables)                    
+                    union not allows duplicates
+                    union all allows duplicates
+
+                    select * from customers
+                     union                       it will combines the two tables one by one 
+                     select * from transactions;
+
+self join - just a another copy of a table to itself,used to compare rows of the same table
+                         select cus_name,cus_address,amount  in this line we only ask the customer name ,customer address, amount
+                         from customers as c                  we named the customer table as c
+                         inner join transactions as t         we implement the inner join to transaction table and also named as t
+                         on c.customer_id=t.tran_id;          we combine both table by customer id and transaction id
+
+views is a virtual table and it updates automatically
+                     create view customer_name as   creating view named as customer name
+                     select cus_name                selecting only cus_name from customers table
+                     from customers;
+
+index is the btree data structure and are used to find values within the specific column more quickly
+                                   create index first_name_idx  craeting index for first name at employees for faster searching
+                                   on employees(first_name);
+
+                                     show index from employees;  to view the index
+
+                                   alter table employees          to delete thet index
+                                   drop index first_name_idx;
+
+                                  create index f_l_name_idx
+                                  on employees(first_name,l_name); to create multiple index
+subquery-a query within a another query
+                                  
+                                select first_name,l_name,pay_scale,
+                                (select avg(pay_scale)               this following line is subquery and it was written inside the parenthesis
+                                from employees) as average_scale
+                                from employees;
+
+distinct - to print uniquely elements not repetetive
+                                  select distinct cus_id from customers; this only prints the distinct element not repetetive
+
+group by - aggregate all rows by specific column
+
+                                    select sum(amount),order_date
+                                    from transact                    we add the same date amount by group by fuction
+                                    group by(order_date);
+
+rollup -its a extention of the grouup by clause and produces another row and shows the grand total
+                                    select sum(amount),order_date
+                                    from transact
+                                    group by order_date with rollup; it will tell the grand total amount of the transact table
+
+on delete set null = when foreign key is deleted ,replace foreign as null
+`                                  alter table trans
+                                    add constraint
+                                    foreign key(customer_is) references customers(customer_id)
+                                    on delete set null; after creating table
+
+
+on delete cascade = when foreign key is deleted ,delete the row
+
+                                    alter table trans
+                                    add constraint
+                                    foreign key(customer_is) references customers(customer_id)
+                                    on delete cascade; after creating table
+
+
+
+
+
+
