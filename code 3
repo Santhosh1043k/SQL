@@ -1,0 +1,43 @@
+stored procedures - is a prepared sql code that you can save great if there's  a query that you write often
+
+                      delimiter $$                  we should first setup the delimiter to the set of queries
+                      create procedure find_customer()  
+                      begin
+                      	select * 
+                          from customers;
+                      end $$                          end the delimiter here
+                      delimiter ;
+                      
+                      call find_customer();           to call the stored procedure
+                      
+                      drop procedure find_customer;    to delete procedure
+
+
+
+                       delimiter $$
+                      create procedure find_customer(in id int)  creating the stored procedure for a stored parameter
+                      begin
+                      	select * 
+                          from customers
+                          where customer_id = id;
+                      end $$
+                      delimiter ;
+                      call find_customer(1);              to call the id we specify the id inside the parameter
+
+triggers - when an event happens,do something
+            ex.(insert,update,delete)
+            check data,handles errorss,auting tables
+
+            
+            create trigger pay_scale_before_update   to create the triggers
+            before update on employees                use update before or after
+            for each row                              in each row
+            set new.salary = (new.pay_scale * 2000);    set salary and pay_scale to new because sql wants to understand the new update
+
+          and after updating the pay_scale leads to a new salary amount using triggers
+
+            create trigger pay_scale_before_insert
+            before insert on employees              use insert for inserting the new row
+            for each row
+            set new.salary = (new.pay_scale * 2000);
+          and after inserting the new row our trigger will update the value automatically
